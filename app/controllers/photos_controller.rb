@@ -1,58 +1,50 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: %i[ show edit update destroy ]
-
-  # GET /photos
+  before_action :set_photo, only: %i[update show destroy]
+  before_action :authorized, only: %i[create update destroy]
   def index
     @photos = Photo.all
+    render json: @photos
   end
 
-  # GET /photos/1
-  def show
-  end
-
-  # GET /photos/new
-  def new
-    @photo = Photo.new
-  end
-
-  # GET /photos/1/edit
-  def edit
-  end
-
-  # POST /photos
+  # POST /properties
   def create
-    @photo = Photo.new(photo_params)
-
-    if @photo.save
-      redirect_to @photo, notice: "Photo was successfully created."
+    photo = Cloudinary::Uploader.upload(params[:image])
+    photo_name = params[:name]
+    property_id = params[:property_id]
+    @photo_new = Photo.create(name: photo_name, url: photo['url'], property_id: property_id)
+    if @photo_new.valid?
+      render json: @photo_new, status: :created
     else
-      render :new, status: :unprocessable_entity
+      render json: @photo_new.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /photos/1
+  # PATCH/PUT /properties/id
   def update
     if @photo.update(photo_params)
-      redirect_to @photo, notice: "Photo was successfully updated."
+      render json: @photo
     else
-      render :edit, status: :unprocessable_entity
+      render json: @photo.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /photos/1
+  # GET /properties/id
+  def show
+    render json: @photo
+  end
+
+  # DELETE /properties/id
   def destroy
     @photo.destroy
-    redirect_to photos_url, notice: "Photo was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def photo_params
-      params.require(:photo).permit(:name, :url, :property_id)
-    end
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
+
+  def photo_params
+    params.require(:photo).permit(:name, :url, :property_id)
+  end
 end
