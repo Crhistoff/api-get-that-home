@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  favorite: false
+  closed: false
+  contacted: false
+  user: one
+  property: one
+
+two:
+  favorite: false
+  closed: false
+  contacted: false
+  user: two
+  property: two

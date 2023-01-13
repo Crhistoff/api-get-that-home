@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @property_user %>
+
+<div>
+  <%= link_to "Edit this property user", edit_property_user_path(@property_user) %> |
+  <%= link_to "Back to property users", property_users_path %>
+
+  <%= button_to "Destroy this property user", @property_user, method: :delete %>
+</div>

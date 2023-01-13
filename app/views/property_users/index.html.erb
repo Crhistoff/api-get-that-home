@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Property users</h1>
+
+<div id="property_users">
+  <% @property_users.each do |property_user| %>
+    <%= render property_user %>
+    <p>
+      <%= link_to "Show this property user", property_user %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New property user", new_property_user_path %>
