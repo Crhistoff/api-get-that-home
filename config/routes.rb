@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :property_users
   resources :properties
   resources :users
-  get "/articles", to: "articles#index"
+  post "/login", to: "users#login"
+  get "/auto_login", to: "users#auto_login"
+  post "/signup", to: "users#create"
+
 
 end

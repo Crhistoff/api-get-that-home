@@ -24,6 +24,18 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+
+gem 'cloudinary'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# gem 'jbuilder', '~> 2.7'
+# Use Redis adapter to run Action Cable in production
+# gem 'redis', '~> 4.0'
+# Use Active Model has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'rack-cors'
+
+gem 'jwt'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 #gem "jbuilder"
 
